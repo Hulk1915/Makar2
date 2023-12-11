@@ -1,0 +1,19 @@
+<div class="container">
+    <div class="row mt-4">
+        <div class="col-12">
+            <h1>Каталог книг</h1>
+        </div>
+        <% @books.each do |book| %>
+            <div class="col-4">
+                <div class="card card-body">
+                <img class="img-fluid" src="<%= book.image_url.url %>">
+                <h4><%= (book.title) %></h4>
+                <div class="d-flex">
+                    <p>Стоимость: <b><%= number_to_currency(book.price, unit: '₽') %></b></p>
+                </div>
+                <a href="/books/<%= (book.id) %>" class="btn btn-primary">Посмотреть</a>
+                </div>
+            </div>
+        <% end %>
+    </div>
+</div>

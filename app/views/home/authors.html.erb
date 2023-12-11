@@ -1,0 +1,17 @@
+<div class="container">
+    <div class="row mt-4">
+        <div class="col-12">
+            <h1>Список авторов книг магазина</h1>
+        </div>
+        <% @authors.each do |author| %>
+            <div class="col-12 my-2">
+                <div class="card card-body">
+                    <h4>ФИО: <%= (author.name) %></h4>
+                    <p>Биография: <%= (author.biography) %></p>
+                    <p>Дата рождения: <%= (author.birth_date) %></p>
+                    <p>Вебсайт: <%= (author.website) %></p>
+                </div>
+            </div>
+        <% end %>
+    </div>
+</div>

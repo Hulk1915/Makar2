@@ -1,0 +1,21 @@
+<div class="container">
+    <div class="row mt-4">
+        <div class="col-12">
+            <h1><%= @book.title %></h1>
+            <div class="col-8">
+                <img class="img-fluid" src="<%= @book.image_url.url %>">
+            </div>
+            <div class="col-4">
+                <b>Жанр: </b>
+                <p><%= @book.genre.name %></p>
+                <b>Автор: </b>
+                <p><%= @book.author.name %></p>
+                <b>Описание</b>
+                <p><%= @book.description %></p>
+                <p>Стоимость: <b><%= number_to_currency(@book.price, unit: '₽') %></b></p>
+                <a href="/books/<%= (@book.id) %>" class="btn btn-success">Купить</a>
+                <a href="/" class="btn btn-primary">Назад</a>
+            </div>
+        </div>
+    </div>
+</div>

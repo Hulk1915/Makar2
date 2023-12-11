@@ -1,0 +1,29 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12 mt-4">
+            <h2>Добавить автора</h2>
+            <%= form_with(model: @author, url: '/authors/add', method: 'post') do |form| %>
+                <div class="form-group">
+                    <%= form.label :name, 'ФИО' %>
+                    <%= form.text_field :name, name: 'author[name]', class: 'form-control' %>
+                </div>
+                <div class="form-group">
+                    <%= form.label :biography, 'Биография' %>
+                    <%= form.text_area :biography, name: 'author[biography]', class: 'form-control' %>
+                </div>
+                <div class="form-group">
+                    <%= form.label :birth_date, 'Дата рождения' %>
+                    <%= form.date_field :birth_date, name: 'author[birth_date]', class: 'form-control' %>
+                </div>
+                <div class="form-group">
+                    <%= form.label :website, 'Вебсайт' %>
+                    <%= form.text_field :website, name: 'author[website]', class: 'form-control' %>
+                </div>
+                <div class="form-group">
+                    <%= form.submit 'Добавить', class: 'btn btn-success' %>
+                    <a href="/books/new" class="btn btn-info">Назад</a>
+                </div>
+            <% end %>
+        </div>
+    </div>
+</div>
