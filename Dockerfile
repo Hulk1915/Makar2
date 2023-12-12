@@ -1,34 +1,33 @@
-# /path/to/app/Dockerfile
-FROM ruby:2.7.6
-#gf
-# Установка часового пояса
+# Используем базовый образ с нужной версией Ruby
+FROM ruby:3.2.2
 
-# RUN apk add --update tzdata && \
-#     cp /usr/share/zoneinfo/Europe/London /etc/localtime && \
-#     echo "Europe/London" > /etc/timezone
+# Устанавливаем необходимые зависимости
+RUN apt-get update -qq && apt-get install -y build-essential libpq-dev
 
-# # Установка в контейнер runtime-зависимостей приложения
-# RUN apk add --update --virtual runtime-deps postgresql-client nodejs libffi-dev readline sqlite
+# Устанавливаем Bundler
+RUN gem install bundler
 
-# Соберем все во временной директории
-WORKDIR /tmp
-ADD Gemfile* ./
+# Создаем директорию приложения внутри контейнера
+WORKDIR /app
 
-RUN apk add --virtual build-deps build-base openssl-dev postgresql-dev libc-dev linux-headers libxml2-dev libxslt-dev readline-dev && \
-    bundle install --jobs=2 && \
-    apk del build-deps
+# Копируем Gemfile и Gemfile.lock в контейнер
+COPY Gemfile Gemfile.lock ./
 
-# Копирование кода приложения в контейнер
-ENV APP_HOME /app
-COPY . $APP_HOME
-WORKDIR $APP_HOME
+# Устанавливаем зависимости
+RUN bundle install
 
-# Настройка переменных окружения для production
-ENV RAILS_ENV=production \
-    RACK_ENV=production
+# Копируем все файлы из текущей директории в контейнер
+COPY . .
 
-# Проброс порта 3000 
+# Устанавливаем переменную окружения для Rails
+ENV RAILS_ENV=production
+
+# Создаем базу данных и выполняем миграции
+RUN bundle exec rails db:create
+RUN bundle exec rails db:migrate
+
+# Экспонируем порт 3000
 EXPOSE 3000
 
-# Запуск по умолчанию сервера puma
-CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]           
+# Запускаем Rails-приложение
+CMD ["rails", "server", "-b", "0.0.0.0"]
