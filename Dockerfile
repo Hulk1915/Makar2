@@ -1,5 +1,5 @@
 # /path/to/app/Dockerfile
-FROM ruby: 2.7.6
+FROM ruby:2.7.6
 
 # Установка часового пояса
 RUN apk add --update tzdata && \
