@@ -23,6 +23,7 @@ COPY . .
 ENV RAILS_ENV=production
 
 # Создаем базу данных и выполняем миграции
+RUN bundle exec rails db:wait
 RUN bundle exec rails db:create
 RUN bundle exec rails db:migrate
 
