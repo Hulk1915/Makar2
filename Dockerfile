@@ -7,8 +7,8 @@ FROM ruby:2.7.6
 #     cp /usr/share/zoneinfo/Europe/London /etc/localtime && \
 #     echo "Europe/London" > /etc/timezone
 
-# Установка в контейнер runtime-зависимостей приложения
-RUN apk add --update --virtual runtime-deps postgresql-client nodejs libffi-dev readline sqlite
+# # Установка в контейнер runtime-зависимостей приложения
+# RUN apk add --update --virtual runtime-deps postgresql-client nodejs libffi-dev readline sqlite
 
 # Соберем все во временной директории
 WORKDIR /tmp
