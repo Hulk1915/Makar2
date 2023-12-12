@@ -2,13 +2,10 @@
 FROM ruby:2.7.6
 #gf
 # Установка часового пояса
-FROM alpine:latest
 
-# Устанавливаем apk
-RUN apk update && apk add —no-cache apk-tools
-RUN apk add --update tzdata && \
-    cp /usr/share/zoneinfo/Europe/London /etc/localtime && \
-    echo "Europe/London" > /etc/timezone
+# RUN apk add --update tzdata && \
+#     cp /usr/share/zoneinfo/Europe/London /etc/localtime && \
+#     echo "Europe/London" > /etc/timezone
 
 # Установка в контейнер runtime-зависимостей приложения
 RUN apk add --update --virtual runtime-deps postgresql-client nodejs libffi-dev readline sqlite
