@@ -1,6 +1,6 @@
 # /path/to/app/Dockerfile
 FROM ruby:2.7.6
-
+#gf
 # Установка часового пояса
 FROM alpine:latest
 
